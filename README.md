@@ -31,3 +31,6 @@ Once the container is running, open your web browser and navigate to [http://loc
 ### 4. Enter Your Name
 
 Type in your name in the provided input field and hit enter. The application will print your name on the screen!
+
+
+![django-print-name](https://github.com/user-attachments/assets/2478ddfb-873f-41a3-aa65-49e08ebca19f)
