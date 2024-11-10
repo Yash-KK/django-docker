@@ -27,6 +27,7 @@ phases:
       - python manage.py migrate
       - echo "Running test cases..."
       - python manage.py test
+      - cd ..
   build:
     commands:
       - echo "Building Docker image..."
