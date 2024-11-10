@@ -4,6 +4,9 @@ env:
     DOCKER_REGISTRY_USERNAME: /docker/username
     DOCKER_REGISTRY_PASSWORD: /docker/password
     DOCKER_REGISTRY_URL: /docker/registry/url
+  variables:
+    default: "default"
+    
 phases:
   install:
     runtime-versions:
