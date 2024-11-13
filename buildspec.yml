@@ -20,7 +20,7 @@ phases:
 
   pre_build:
     commands:
-      - echo "Changing directory to 'toDeploy'..."
+      - echo "Changing directory to 'toDeploy'...."
       - cd toDeploy
       - echo "Setting up environment..."
       - python manage.py makemigrations
