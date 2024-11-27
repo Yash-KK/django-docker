@@ -1,19 +1,19 @@
-FROM ubuntu
-
+# Stage 1
+FROM python:3.10-alpine AS builder
 WORKDIR /app
 
-COPY requirements.txt /app
-COPY toDeploy /app
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
 
-ENV PIP_BREAK_SYSTEM_PACKAGES 1
+# Stage 2
+FROM python:3.10-alpine
+WORKDIR /app
 
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
-    pip install -r requirements.txt && \
-    cd toDeploy
+COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
 
-RUN python3 manage.py makemigrations && \
-python3 manage.py migrate
+COPY toDeploy /app/toDeploy
 
-ENTRYPOINT ["python3"]
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+WORKDIR /app/toDeploy
+
+CMD ["sh", "-c", "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"]
